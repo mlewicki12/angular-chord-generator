@@ -1,0 +1,57 @@
+import { flush, TestBed } from '@angular/core/testing';
+
+import { ChordGeneratorService } from './chordgenerator.service';
+
+describe('ChordGeneratorService', () => {
+  let service: ChordGeneratorService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ChordGeneratorService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('findNote gets index of specified note from default array', () => {
+    const note = service.findNote('E');
+    expect(note).toBe(7);
+  });
+
+  it('findNote works with given string', () => {
+    const note = service.findNote('G', ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#']);
+    expect(note).toBe(3);
+  })
+
+  it('buildString should build string', () => {
+    const sampleString = service.buildString('E');
+    expect(sampleString).toEqual(['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#']);
+  });
+
+  it('flushString builds string as expected', () => {
+    const flushedString = service.flushString('E', ['C', 'E', 'G']);
+    expect(flushedString).toEqual([0, 3, 8]);
+  });
+
+  it('getChordLength gets the stretch distance for a chord', () => {
+    const chordLength = service.getChordLength([0, 1, 8]);
+    expect(chordLength).toEqual(7);
+  })
+
+  it('generate produces a list of chords', () => {
+    const chords = service.generate(['C', 'E', 'G'], ['E', 'B', 'G']);
+    expect(chords).toEqual([
+      [ 0, 1, 9 ], [ 0, 5, -1 ], [ 0, 8, -1 ], [ 0, -1, 5 ], [ 0, -1, 9 ],
+      [ 3, 1, 9 ], [ 3, 5, 9 ], [ 3, 5, -1 ], [ 3, 8, 9 ], [ 3, 8, -1 ], [ 3, -1, 5 ], [ 3, -1, 9 ],
+      [ 8, 1, 0 ], [ 8, 1, 5 ], [ 8, 1, 9 ], [ 8, 1, -1 ], [ 8, 5, -1 ], [ 8, 8, -1 ], [ 8, -1, 0 ], [ 8, -1, 5 ], [ 8, -1, 9 ], [ 8, -1, -1],
+      [ -1, 1, 5 ], [ -1, 1, 9 ], [ -1, 5, 0 ], [ -1, 5, 5 ], [ -1, 5, 9 ], [ -1, 5, -1 ], [ -1, 8, 0 ], [ -1, 8, 5 ], [ -1, 8, 9 ],
+      [ -1, 8, -1 ], [ -1, -1, 5 ], [ -1, -1, 9 ]
+    ]);
+  });
+
+  it('getInterval finds correct interval', () => {
+    const interval = service.getInterval('G', 'C');
+    expect(interval).toBe(5);
+  });
+});
