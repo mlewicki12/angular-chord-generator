@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ChordComponent } from './components/chord/chord.component';
 import { ChordListComponent } from './components/chordlist/chordlist.component';
+import { ChordMenuComponent } from './components/chord-menu/chord-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChordComponent,
-    ChordListComponent
+    ChordListComponent,
+    ChordMenuComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

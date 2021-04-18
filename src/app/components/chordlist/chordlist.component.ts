@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChordGeneratorService } from 'src/app/services/chordgenerator.service';
 
 @Component({
@@ -7,15 +7,16 @@ import { ChordGeneratorService } from 'src/app/services/chordgenerator.service';
   styleUrls: ['./chordlist.component.scss']
 })
 export class ChordListComponent implements OnInit {
-  strings: string[];
+  @Input() strings: string[];
+  @Input() chord: string[];
+
   chords: any[];
 
-  constructor(chordGenerator: ChordGeneratorService) {
-    this.strings = ['E', 'B', 'G', 'D', 'A', 'E'];
-    this.chords = chordGenerator.generate(['C', 'E', 'G'], this.strings);
+  constructor(public chordGenerator: ChordGeneratorService) {
   }
 
   ngOnInit(): void {
+    this.chords = this.chordGenerator.generate(this.chord, this.strings);
   }
 
 }

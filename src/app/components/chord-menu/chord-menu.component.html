@@ -1,0 +1,49 @@
+
+<div class="main" *ngIf="mode === 'menu'">
+  <h1>Chord Generator</h1>
+  <hr />
+
+  <p>Simply input the tuning you're using and the chord you want to find and press 'Build chord' to get chord voicings.</p>
+
+  <h2>Tuning</h2>
+  <hr />
+  <div class="input">
+    <button class="button-web" (click)="removeString()">-</button>
+    <div class="input-text">
+      <input *ngFor="let string of tuning; let i = index" type="text" [ngModel]="tuning[i]" (ngModelChange)="onTuningChange($event, i)" (focusout)="update()" />
+    </div>
+    <button class="button-web" (click)="addString()">+</button>
+
+    <div class="button-mobile">
+      <button (click)="removeString()">-</button>
+      <button (click)="addString()">+</button>
+    </div>
+  </div>
+
+  <h2>Chord</h2>
+  <hr />
+  <div class="input">
+    <button class="button-web" (click)="removeChord()">-</button>
+    <div class="input-text">
+      <input *ngFor="let string of chord; let i = index" type="text" [ngModel]="chord[i]" (ngModelChange)="onChordChange($event, i)" (focusout)="update()" />
+    </div>
+    <button class="button-web" (click)="addChord()">+</button>
+
+    <div class="button-mobile">
+      <button (click)="removeChord()">-</button>
+      <button (click)="addChord()">+</button>
+    </div>
+  </div>
+
+  <button (click)="submit()">Build chord</button>
+</div>
+
+<app-chordlist *ngIf="mode === 'chords'" [strings]="tuning" [chord]="chord"></app-chordlist>
+
+<div class="main" id="footer" style="margin-top: 10px">
+  <p>Graphic design is my passion.
+    <span class="bullet">&bull;</span>
+    Built by <a href="https://mlewicki.me">Maciej Lewicki</a> 
+    <span class="bullet">&bull;</span>
+    Code avaiable on <a href="">Github</a></p>
+</div>

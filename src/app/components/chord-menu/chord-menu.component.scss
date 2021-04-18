@@ -1,0 +1,122 @@
+
+@media (max-width: 950px) {
+  .main {
+    width: 90% !important;
+  }
+
+  .button-mobile {
+    display: flex !important;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+  }
+
+  .input-text {
+    width: 100%;
+  }
+
+  .button-web {
+    display: none;
+  }
+}
+
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  height: 100%;
+
+  background-color: #F2EECB;
+  border: 1px inset black;
+
+  button {
+    background-color: unset;
+    text-align: center;
+    background-color: darken(#F2EECB, 15%);
+  }
+
+  > button {
+    margin: 10px;
+  }
+}
+
+.button-mobile {
+  display: none;
+}
+
+.input {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 90%;
+  padding: 10px;
+}
+
+.input-text {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+
+  > input {
+    width: 1.5rem;
+    padding: 0.5rem;
+
+    margin: 0.5rem;
+    background-color: unset;
+    border: unset;
+    border-bottom: 1px solid black;
+
+    text-align: center;
+  }
+}
+
+h1 {
+  font-size: 1.75rem;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+}
+
+p {
+  text-align: center;
+  padding: 5px;
+}
+
+hr {
+  width: 90%;
+  border: unset;
+  border-bottom: 1px dashed black;
+  color: unset;
+}
+
+a {
+  font-weight: bold;
+  text-decoration: none;
+
+  color: #462FA7;
+}
+
+#footer {
+  > p {
+    margin: 0;
+  }
+
+  .bullet {
+    padding: 0 10px;
+  }
+}
