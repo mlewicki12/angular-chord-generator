@@ -9,29 +9,19 @@ import { ChordGeneratorService } from 'src/app/services/chordgenerator.service';
 export class ChordMenuComponent implements OnInit {
   mode: string;
 
-  tuning: string[];
-  chord: string[];
+  tuning: {note: string}[];
+  chord: {note: string}[];
 
-  tempChord: string[];
-  tempTuning: string[];
+  tuningArray: string[];
+  chordArray: string[];
 
   constructor(public chordGenerator: ChordGeneratorService) {
 
     this.mode = 'menu';
 
-    this.tuning = ['E', 'B', 'G', 'D', 'A', 'E'];
-    this.tempTuning = this.tuning.slice();
+    this.tuning = [{note: 'E'}, {note: 'B'}, {note: 'G'}, {note: 'D'}, {note: 'A'}, {note: 'E'}];
 
-    this.chord = ['C', 'E', 'G'];
-    this.tempChord = this.chord.slice();
-  }
-
-  onTuningChange(event, index) {
-    this.tempTuning[index] = event;
-  }
-
-  onChordChange(event, index) {
-    this.tempChord[index] = event;
+    this.chord = [{note: 'C'}, {note: 'E'}, {note: 'G'}];
   }
 
   removeString() {
@@ -40,7 +30,6 @@ export class ChordMenuComponent implements OnInit {
     }
 
     this.tuning.pop();
-    this.tempTuning = this.tuning.slice();
   }
 
   addString() {
@@ -49,11 +38,9 @@ export class ChordMenuComponent implements OnInit {
     }
 
     // get the fifth
-    this.tuning.push(
-      this.chordGenerator.getNote(this.tuning[this.tuning.length - 1], 7)
-    );
-
-    this.tempTuning = this.tuning.slice();
+    this.tuning.push({
+      note: this.chordGenerator.getNote(this.tuning[this.tuning.length - 1].note, 7)
+    });
   }
 
   removeChord() {
@@ -62,7 +49,6 @@ export class ChordMenuComponent implements OnInit {
     }
 
     this.chord.pop();
-    this.tempChord = this.chord.slice();
   }
 
   addChord() {
@@ -71,19 +57,15 @@ export class ChordMenuComponent implements OnInit {
       return;
     }
 
-    this.chord.push(
-      this.chordGenerator.getNote(this.chord[this.chord.length - 1], 7)
-    );
-
-    this.tempChord = this.chord.slice();
-  }
-
-  update() {
-    this.tuning = this.tempTuning.slice();
-    this.chord = this.tempChord.slice();
+    this.chord.push({
+      note: this.chordGenerator.getNote(this.chord[this.chord.length - 1].note, 7)
+    });
   }
 
   submit() {
+    this.tuningArray = this.tuning.map(item => item.note);
+    this.chordArray = this.chord.map(item => item.note);
+
     this.mode = 'chords';
   }
 

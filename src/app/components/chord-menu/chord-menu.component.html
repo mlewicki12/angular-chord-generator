@@ -10,7 +10,7 @@
   <div class="input">
     <button class="button-web" (click)="removeString()">-</button>
     <div class="input-text">
-      <input *ngFor="let string of tuning; let i = index" type="text" [ngModel]="tuning[i]" (ngModelChange)="onTuningChange($event, i)" (focusout)="update()" />
+      <input *ngFor="let string of tuning" type="text" [(ngModel)]="string.note" (change)="update()"/>
     </div>
     <button class="button-web" (click)="addString()">+</button>
 
@@ -25,7 +25,7 @@
   <div class="input">
     <button class="button-web" (click)="removeChord()">-</button>
     <div class="input-text">
-      <input *ngFor="let string of chord; let i = index" type="text" [ngModel]="chord[i]" (ngModelChange)="onChordChange($event, i)" (focusout)="update()" />
+      <input *ngFor="let string of chord" type="text" [(ngModel)]="string.note" (change)="update()"/>
     </div>
     <button class="button-web" (click)="addChord()">+</button>
 
@@ -38,12 +38,12 @@
   <button (click)="submit()">Build chord</button>
 </div>
 
-<app-chordlist *ngIf="mode === 'chords'" [strings]="tuning" [chord]="chord"></app-chordlist>
+<app-chordlist *ngIf="mode === 'chords'" [strings]="tuningArray" [chord]="chordArray"></app-chordlist>
 
 <div class="main" id="footer" style="margin-top: 10px">
   <p>Graphic design is my passion.
     <span class="bullet">&bull;</span>
     Built by <a href="https://mlewicki.me">Maciej Lewicki</a> 
     <span class="bullet">&bull;</span>
-    Code avaiable on <a href="">Github</a></p>
+    Code available on <a href="https://github.com/mlewicki12/angular-chord-generator">Github</a></p>
 </div>
