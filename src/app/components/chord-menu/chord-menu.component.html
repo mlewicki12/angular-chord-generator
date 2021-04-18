@@ -2,11 +2,16 @@
 <div class="main" *ngIf="mode === 'menu'">
   <h1>Chord Generator</h1>
   <hr />
-
-  <p>Simply input the tuning you're using and the chord you want to find and press 'Build chord' to get chord voicings.</p>
+  <p>
+    This little tool will generate a list of chord voicings for you.
+    Simply input the tuning you're using as well as the chord you're looking
+    for and press 'Generate' when you're ready. Use the '+' and '-' buttons
+    to add and remove notes from tuning/chord.
+  </p>
 
   <h2>Tuning</h2>
   <hr />
+  <p style="margin: 0">Put in the tuning you're using.</p>
   <div class="input">
     <button class="button-web" (click)="removeString()">-</button>
     <div class="input-text">
@@ -22,6 +27,7 @@
 
   <h2>Chord</h2>
   <hr />
+  <p style="margin: 0">Put in the chord you want to find voicings for.</p>
   <div class="input">
     <button class="button-web" (click)="removeChord()">-</button>
     <div class="input-text">
@@ -35,12 +41,18 @@
     </div>
   </div>
 
-  <button (click)="submit()">Build chord</button>
+  <button (click)="submit()">Generate</button>
 </div>
 
+<div class="main" *ngIf="mode === 'chords'">
+  <h1>Chord</h1>
+  <div class="input-text">
+    <input *ngFor="let string of chordArray;" type="text" [ngModel]="string" disabled />
+  </div>
+</div>
 <app-chordlist *ngIf="mode === 'chords'" [strings]="tuningArray" [chord]="chordArray"></app-chordlist>
 
-<div class="main" id="footer" style="margin-top: 10px">
+<div class="main" id="footer">
   <p>Graphic design is my passion.
     <span class="bullet">&bull;</span>
     Built by <a href="https://mlewicki.me">Maciej Lewicki</a> 
