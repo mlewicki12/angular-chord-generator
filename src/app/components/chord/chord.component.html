@@ -2,7 +2,7 @@
 <div>
   <ul>
     <li *ngFor="let string of strings; index as i">
-      {{string}}{{string.length === 1 ? ' ' : ''}}|--{{getChord(i) !== '-1' ? getChord(i) : '-'}}{{getChord(i) !== '-1' && getChord(i).length === '2' ? '' : '-'}}--
+      {{string}}{{string.length === 1 ? ' ' : ''}}|--{{getChord(i) !== '-1' ? getChord(i) : '-'}}{{getChord(i) !== '-1' && getChord(i).length === 2 ? '' : '-'}}---
     </li>
   </ul>
 </div>

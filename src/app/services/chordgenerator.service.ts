@@ -82,6 +82,28 @@ export class ChordGeneratorService {
     return max - min;
   }
 
+  getNote(string: string, interval: number) {
+    if(interval === -1) {
+      return 'X';
+    }
+
+    return this.buildString(string)[interval];
+  }
+
+  private isEqual(obj1: any[], obj2: any[]) {
+    if(obj1.length !== obj2.length) {
+      return false;
+    }
+
+    for(let i = 0; i < obj1.length; ++i) {
+      if(obj1[i] != obj2[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   generate(chord: string[], strings: string[]) {
     const chordNotes = strings.map(note => this.flushString(note, chord).concat([-1]));
     const chords = this.generateRec(chordNotes, [])
@@ -91,7 +113,22 @@ export class ChordGeneratorService {
       .reduce((prev, next) => {
         return prev.concat(next);
       }, [])
-      .filter(item => this.getChordLength(item) > 5);
+      // make sure the length is acceptable(tm)
+      .filter(item => this.getChordLength(item) < 5)
+      // make sure each chord has all the required notes
+      .filter(item => {
+        let generatedChord = item
+          // change each fret to a note
+          .map((note, index) => this.getNote(strings[index], note))
+          // make sure there's no mutes
+          .filter(note => note !== 'X')
+          // make sure there's no doubles
+          .reduce((prev, next) => {
+            return prev.includes(next) ? prev : prev.concat([next]);
+          }, []).sort();
+        
+        return this.isEqual(generatedChord, chord.sort());
+      });
 
     return chords;
   }
