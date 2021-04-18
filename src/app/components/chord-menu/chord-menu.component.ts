@@ -16,11 +16,9 @@ export class ChordMenuComponent implements OnInit {
   chordArray: string[];
 
   constructor(public chordGenerator: ChordGeneratorService) {
-
     this.mode = 'menu';
 
     this.tuning = [{note: 'E'}, {note: 'B'}, {note: 'G'}, {note: 'D'}, {note: 'A'}, {note: 'E'}];
-
     this.chord = [{note: 'C'}, {note: 'E'}, {note: 'G'}];
   }
 
@@ -62,9 +60,21 @@ export class ChordMenuComponent implements OnInit {
     });
   }
 
+  update(event, array, i) {
+    if(event.target.value !== '' && !this.chordGenerator.isNote(event.target.value)) {
+      event.target.value = array[i].note;
+    }
+  }
+
   submit() {
-    this.tuningArray = this.tuning.map(item => item.note);
-    this.chordArray = this.chord.map(item => item.note);
+    // filter out non-note strings just in case
+    this.tuningArray = this.tuning.map(item => item.note).filter(item => this.chordGenerator.isNote(item));
+    this.chordArray = this.chord
+      .map(item => item.note)
+      .reduce((prev, next) => {
+        return prev.includes(next) ? prev : prev.concat([next]);
+      }, [])
+      .filter(item => this.chordGenerator.isNote(item));
 
     this.mode = 'chords';
   }

@@ -20,6 +20,10 @@ export class ChordGeneratorService {
     return ret;
   }
 
+  isNote(note: string) {
+    return this.notes.find(item => item === note) !== undefined;
+  }
+
   buildString(note: string) {
     const ret = [];
     const firstNoteIndex = this.findNote(note);

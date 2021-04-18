@@ -10,7 +10,7 @@
   <div class="input">
     <button class="button-web" (click)="removeString()">-</button>
     <div class="input-text">
-      <input *ngFor="let string of tuning" type="text" [(ngModel)]="string.note" (change)="update()"/>
+      <input *ngFor="let string of tuning; let i = index" type="text" [ngModel]="string.note" (change)="update($event, tuning, i)"/>
     </div>
     <button class="button-web" (click)="addString()">+</button>
 
@@ -25,7 +25,7 @@
   <div class="input">
     <button class="button-web" (click)="removeChord()">-</button>
     <div class="input-text">
-      <input *ngFor="let string of chord" type="text" [(ngModel)]="string.note" (change)="update()"/>
+      <input *ngFor="let string of chord; let i = index" type="text" [ngModel]="string.note" (change)="update($event, chord, i)"/>
     </div>
     <button class="button-web" (click)="addChord()">+</button>
 
