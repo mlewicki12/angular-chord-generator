@@ -11,6 +11,11 @@
     align-items: center;
 
     width: 100%;
+    
+    > button {
+      margin: 5px;
+      padding: 5px;
+    }
   }
 
   .input-text {
