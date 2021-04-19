@@ -51,12 +51,15 @@
   </div>
   <button (click)="back()">Back</button>
 </div>
-<app-chordlist *ngIf="mode === 'chords'" [strings]="tuningArray" [chord]="chordArray"></app-chordlist>
+
+<div class="main" *ngIf="mode === 'chords'">
+  <app-chordlist [strings]="tuningArray" [chord]="chordArray"></app-chordlist>
+</div>
 
 <div class="main" id="footer">
   <p>Graphic design is my passion.
     <span class="bullet">&bull;</span>
-    Built by <a href="https://mlewicki.me">Maciej Lewicki</a> 
+    Built by <a href="https://mlewicki.me">Maciej Lewicki</a> using <a href="https://angular.io"><i class="fab fa-angular"></i>Angular</a>
     <span class="bullet">&bull;</span>
-    Code available on <a href="https://github.com/mlewicki12/angular-chord-generator">Github</a></p>
+    Code available on <a href="https://github.com/mlewicki12/angular-chord-generator"><i class="fab fa-github-alt"></i>Github</a></p>
 </div>
