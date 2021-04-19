@@ -66,6 +66,10 @@ export class ChordMenuComponent implements OnInit {
     }
   }
 
+  back() {
+    this.mode = 'menu';
+  }
+
   submit() {
     // filter out non-note strings just in case
     this.tuningArray = this.tuning.map(item => item.note).filter(item => this.chordGenerator.isNote(item));

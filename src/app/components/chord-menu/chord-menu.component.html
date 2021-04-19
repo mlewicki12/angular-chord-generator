@@ -49,6 +49,7 @@
   <div class="input-text">
     <input *ngFor="let string of chordArray;" type="text" [ngModel]="string" disabled />
   </div>
+  <button (click)="back()">Back</button>
 </div>
 <app-chordlist *ngIf="mode === 'chords'" [strings]="tuningArray" [chord]="chordArray"></app-chordlist>
 
