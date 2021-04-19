@@ -28,6 +28,10 @@ export class ChordMenuComponent implements OnInit {
     }
 
     this.tuning.pop();
+
+    if(this.chord.length > this.tuning.length) {
+      this.chord.pop();
+    }
   }
 
   addString() {
@@ -51,7 +55,7 @@ export class ChordMenuComponent implements OnInit {
 
   addChord() {
     // arbitrary limits fuck yeah
-    if(this.chord.length >= 6) {
+    if(this.chord.length >= 6 || this.chord.length >= this.tuning.length) {
       return;
     }
 
