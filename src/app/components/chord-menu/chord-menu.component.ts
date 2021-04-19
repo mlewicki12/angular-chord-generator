@@ -64,9 +64,12 @@ export class ChordMenuComponent implements OnInit {
     });
   }
 
-  update(event, array, i) {
+  update(event, i, array) {
+    // if the string isn't empty or a valid note, stop the modify
     if(event.target.value !== '' && !this.chordGenerator.isNote(event.target.value)) {
       event.target.value = array[i].note;
+    } else {
+      array[i].note = event.target.value;
     }
   }
 
