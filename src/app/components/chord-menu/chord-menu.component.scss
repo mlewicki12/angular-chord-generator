@@ -107,15 +107,29 @@ hr {
 }
 
 a {
+  margin: 5px;
+
   font-weight: bold;
   text-decoration: none;
 
   color: #462FA7;
 }
 
+a:hover, a:active {
+  color: lighten(#462FA7, 10%);
+  font-size: 1.05rem;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+}
+
 #footer {
   > p {
     margin: 0;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
   }
 
   .bullet {
