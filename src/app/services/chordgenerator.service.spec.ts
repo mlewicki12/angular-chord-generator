@@ -24,6 +24,16 @@ describe('ChordGeneratorService', () => {
     expect(note).toBe(3);
   })
 
+  it('isNote says A is a note', () => {
+    const note = service.isNote('A');
+    expect(note).toBe(true);
+  });
+
+  it('isNote works with flats', () => {
+    const note = service.isNote('Ab');
+    expect(note).toBe(true);
+  })
+
   it('buildString should build string', () => {
     const sampleString = service.buildString('E');
     expect(sampleString).toEqual(['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#']);

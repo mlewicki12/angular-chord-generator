@@ -5,12 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class ChordGeneratorService {
   private notes = [
-    'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'
+    // encoding flats with a capital B bc that's the only way toUpperCase will work without me writing a workaround for it
+    // and im lazy
+    ['A'], ['A#', 'BB'], 'B', 'C', ['C#', 'DB'], 'D', ['D#', 'EB'], 'E', 'F', ['F#', 'GB'], 'G', ['G#', 'AB']
   ];
 
   findNote(note: string, string?: string[]) {
     const notes = string ?? this.notes;
-    const ret = notes.findIndex(item => item === note);
+    const ret = notes.findIndex(item => item.includes(note.toUpperCase()));
 
     // wrong note
     if(ret === -1) {
@@ -21,7 +23,7 @@ export class ChordGeneratorService {
   }
 
   isNote(note: string) {
-    return this.notes.find(item => item === note) !== undefined;
+    return this.notes.find(item => item.includes(note.toUpperCase())) !== undefined;
   }
 
   buildString(note: string) {
@@ -30,7 +32,7 @@ export class ChordGeneratorService {
 
     for(let i = 0; i < 12; ++i) {
       let index = (firstNoteIndex + i) % 12;
-      ret.push(this.notes[index]);      
+      ret.push(this.notes[index][0]);      
     }
 
     return ret;
@@ -44,7 +46,7 @@ export class ChordGeneratorService {
       let index = (firstNoteIndex + i) % 12;
 
       // we found them
-      if(this.notes[index] === note2) {
+      if(this.notes[index].includes(note2)) {
         return i;
       }
     }
