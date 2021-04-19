@@ -18,7 +18,7 @@ export class ChordMenuComponent implements OnInit {
   constructor(public chordGenerator: ChordGeneratorService) {
     this.mode = 'menu';
 
-    this.tuning = [{note: 'E'}, {note: 'B'}, {note: 'G'}, {note: 'D'}, {note: 'A'}, {note: 'E'}];
+    this.tuning = [{note: 'E'}, {note: 'A'}, {note: 'D'}, {note: 'G'}, {note: 'B'}, {note: 'E'}];
     this.chord = [{note: 'C'}, {note: 'E'}, {note: 'G'}];
   }
 
@@ -72,7 +72,7 @@ export class ChordMenuComponent implements OnInit {
 
   submit() {
     // filter out non-note strings just in case
-    this.tuningArray = this.tuning.map(item => item.note).filter(item => this.chordGenerator.isNote(item));
+    this.tuningArray = this.tuning.map(item => item.note).filter(item => this.chordGenerator.isNote(item)).reverse();
     this.chordArray = this.chord
       .map(item => item.note)
       .reduce((prev, next) => {
