@@ -10,6 +10,15 @@ export class ChordGeneratorService {
     ['A'], ['A#', 'BB'], 'B', 'C', ['C#', 'DB'], 'D', ['D#', 'EB'], 'E', 'F', ['F#', 'GB'], 'G', ['G#', 'AB']
   ];
 
+  static Scales = {
+    Major: [2, 2, 1, 2, 2, 2],
+    Minor: [2, 1, 2, 2, 2, 1]
+  }
+
+  getAllNotes() {
+    return this.notes.map(item => item[0]);
+  }
+
   findNote(note: string, string?: string[]) {
     const notes = string ?? this.notes;
     const ret = notes.findIndex(item => item.includes(note.toUpperCase()));
@@ -34,6 +43,22 @@ export class ChordGeneratorService {
       let index = (firstNoteIndex + i) % 12;
       ret.push(this.notes[index][0]);      
     }
+
+    return ret;
+  }
+
+  buildFromIntervals(note: string, intervals: number[]) {
+    const ret = [];
+
+    let index = this.findNote(note);
+    ret.push(this.notes[index]);
+
+    intervals.forEach(interval => {
+      index += interval;
+      index %= 12;
+
+      ret.push(this.notes[index][0]);
+    });
 
     return ret;
   }
@@ -94,6 +119,22 @@ export class ChordGeneratorService {
     }
 
     return this.buildString(string)[interval];
+  }
+
+  // this is not really needed, but will make it easier down the line to define chords
+  buildChord(string: string, intervals: number[], scaleDef: number[]) {
+    const scale = this.buildFromIntervals(string, scaleDef);
+    const ret = [];
+
+    intervals.forEach(interval => {
+      if(interval >= scale.length) {
+        throw `invalid interval ${interval}`;
+      }
+
+      ret.push(scale[interval - 1]);
+    });
+
+    return ret;
   }
 
   private isEqual(obj1: any[], obj2: any[]) {

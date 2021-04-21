@@ -8,6 +8,13 @@ import { ChordGeneratorService } from 'src/app/services/chordgenerator.service';
 })
 export class ChordMenuComponent implements OnInit {
   mode: string;
+  selectMode: string;
+
+  shapeNote: string;
+  shapeChord: string;
+
+  notes: string[];
+  chords: any[];
 
   tuning: {note: string}[];
   chord: {note: string}[];
@@ -15,8 +22,18 @@ export class ChordMenuComponent implements OnInit {
   tuningArray: string[];
   chordArray: string[];
 
-  constructor(public chordGenerator: ChordGeneratorService) {
+  constructor(private chordGenerator: ChordGeneratorService) {
     this.mode = 'menu';
+    this.selectMode = 'shape';
+
+    this.notes = chordGenerator.getAllNotes();
+    this.chords = [
+      {key: 'Major', value: ChordGeneratorService.Scales.Major},
+      {key: 'Minor', value: ChordGeneratorService.Scales.Minor}
+    ];
+
+    this.shapeNote = 'C';
+    this.shapeChord = 'Major';
 
     this.tuning = [{note: 'E'}, {note: 'A'}, {note: 'D'}, {note: 'G'}, {note: 'B'}, {note: 'E'}];
     this.chord = [{note: 'C'}, {note: 'E'}, {note: 'G'}];
@@ -64,6 +81,14 @@ export class ChordMenuComponent implements OnInit {
     });
   }
 
+  setShapeSelect() {
+    this.selectMode = 'shape';
+  }
+
+  setNoteSelect() {
+    this.selectMode = 'note';
+  }
+
   update(event, i, array) {
     // if the string isn't empty or a valid note, stop the modify
     if(event.target.value !== '' && !this.chordGenerator.isNote(event.target.value)) {
@@ -80,12 +105,21 @@ export class ChordMenuComponent implements OnInit {
   submit() {
     // filter out non-note strings just in case
     this.tuningArray = this.tuning.map(item => item.note).filter(item => this.chordGenerator.isNote(item)).reverse();
-    this.chordArray = this.chord
-      .map(item => item.note)
-      .reduce((prev, next) => {
-        return prev.includes(next) ? prev : prev.concat([next]);
-      }, [])
-      .filter(item => this.chordGenerator.isNote(item));
+
+    if(this.selectMode === 'note') {
+      this.chordArray = this.chord
+        .map(item => item.note)
+        .reduce((prev, next) => {
+          return prev.includes(next) ? prev : prev.concat([next]);
+        }, [])
+        .filter(item => this.chordGenerator.isNote(item));
+    } else {
+      this.chordArray = this.chordGenerator.buildChord(
+        this.shapeNote,
+        [1, 3, 5],
+        this.chords.find(chord => chord.key === this.shapeChord).value
+      );
+    }
 
     this.mode = 'chords';
   }

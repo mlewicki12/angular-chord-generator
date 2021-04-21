@@ -34,6 +34,25 @@ describe('ChordGeneratorService', () => {
     expect(note).toBe(true);
   })
 
+  it('buildFromIntervals creates a major scale', () => {
+    const scale = service.buildFromIntervals('C', [2, 2, 1, 2, 2, 2]);
+    expect(scale).toEqual(['C', 'D', 'E', 'F', 'G', 'A', 'B']);
+  });
+
+  it('buildFromIntervals creates a minor scale', () => {
+    const scale = service.buildFromIntervals('a', ChordGeneratorService.Scales.Minor);
+  });
+
+  it('buildChord creates a major chord', () => {
+    const chord = service.buildChord('C', [1, 3, 5], ChordGeneratorService.Scales.Major);
+    expect(chord).toEqual(['C', 'E', 'G']);
+  });
+
+  it('buildChord creates a minor chord', () => {
+    const chord = service.buildChord('C', [1, 3, 5], ChordGeneratorService.Scales.Minor);
+    expect(chord).toEqual(['C', 'D#', 'G']);
+  });
+
   it('buildString should build string', () => {
     const sampleString = service.buildString('E');
     expect(sampleString).toEqual(['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#']);
