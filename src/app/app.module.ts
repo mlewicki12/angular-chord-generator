@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ChordComponent } from './components/chord/chord.component';
 import { ChordListComponent } from './components/chordlist/chordlist.component';
 import { ChordMenuComponent } from './components/chord-menu/chord-menu.component';
+import { ScaleComponent } from './components/scale/scale.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChordComponent,
     ChordListComponent,
-    ChordMenuComponent
+    ChordMenuComponent,
+    ScaleComponent
   ],
   imports: [
     BrowserModule,

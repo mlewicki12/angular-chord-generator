@@ -12,7 +12,7 @@ export class ChordGeneratorService {
 
   static Scales = {
     Major: [2, 2, 1, 2, 2, 2],
-    Minor: [2, 1, 2, 2, 2, 1]
+    Minor: [2, 1, 2, 2, 1, 2]
   }
 
   getAllNotes() {
@@ -51,7 +51,7 @@ export class ChordGeneratorService {
     const ret = [];
 
     let index = this.findNote(note);
-    ret.push(this.notes[index]);
+    ret.push(this.notes[index][0]);
 
     intervals.forEach(interval => {
       index += interval;
@@ -59,6 +59,30 @@ export class ChordGeneratorService {
 
       ret.push(this.notes[index][0]);
     });
+
+    return ret;
+  }
+
+  buildScaleShapes(note: string, scale: number[], tuning: string[]) {
+    const notes = this.buildFromIntervals(note, scale);
+
+    const fretArray = ['  '];
+    for(let i = 0; i < 12; ++i) {
+      let add = `${i}`;
+      fretArray.push(` ${add}${add.length === 1 ? ' ' : ''} `);
+    }
+
+
+    const ret = tuning
+      .map(item => this.buildString(item)
+        .map(fret => notes.find(note => note === fret) ? fret : '-')
+        .map(fret => `-${fret}${fret.length === 1 ? '-' : ''}-`))
+      .map((item, index) => {
+        item.unshift(`${tuning[index]}${tuning[index].length === 1 ? ' ' : ''}`);
+        return item;
+      })
+      .map(item => item.join('|'))
+      .concat([fretArray.join(' ')]);
 
     return ret;
   }

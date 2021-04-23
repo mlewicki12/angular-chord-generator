@@ -41,7 +41,19 @@ describe('ChordGeneratorService', () => {
 
   it('buildFromIntervals creates a minor scale', () => {
     const scale = service.buildFromIntervals('a', ChordGeneratorService.Scales.Minor);
+    expect(scale).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
   });
+
+  it('buildScaleShapes builds C major scale shape', () => {
+    const scale = service.buildScaleShapes('C', ChordGeneratorService.Scales.Major, ['E', 'B', 'G', 'D', 'A', 'E']);
+    expect(scale).toEqual(['E |-E--|-F--|----|-G--|----|-A--|----|-B--|-C--|----|-D--|----',
+                           'B |-B--|-C--|----|-D--|----|-E--|-F--|----|-G--|----|-A--|----',
+                           'G |-G--|----|-A--|----|-B--|-C--|----|-D--|----|-E--|-F--|----',
+                           'D |-D--|----|-E--|-F--|----|-G--|----|-A--|----|-B--|-C--|----',
+                           'A |-A--|----|-B--|-C--|----|-D--|----|-E--|-F--|----|-G--|----',
+                           'E |-E--|-F--|----|-G--|----|-A--|----|-B--|-C--|----|-D--|----',
+                           '    0    1    2    3    4    5    6    7    8    9    10   11 ']);
+  })
 
   it('buildChord creates a major chord', () => {
     const chord = service.buildChord('C', [1, 3, 5], ChordGeneratorService.Scales.Major);
