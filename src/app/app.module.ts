@@ -7,6 +7,8 @@ import { ChordComponent } from './components/chord/chord.component';
 import { ChordListComponent } from './components/chordlist/chordlist.component';
 import { ChordMenuComponent } from './components/chord-menu/chord-menu.component';
 import { ScaleComponent } from './components/scale/scale.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ScalesMenuComponent } from './scales-menu/scales-menu.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { ScaleComponent } from './components/scale/scale.component';
     ChordComponent,
     ChordListComponent,
     ChordMenuComponent,
-    ScaleComponent
+    ScaleComponent,
+    ScalesMenuComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

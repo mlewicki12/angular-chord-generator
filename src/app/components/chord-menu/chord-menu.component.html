@@ -1,5 +1,5 @@
 
-<div class="main" *ngIf="mode === 'menu'">
+<section *ngIf="mode === 'menu'">
   <h1>Chord Generator</h1>
   <hr />
   <p>
@@ -11,7 +11,7 @@
 
   <h2>Tuning</h2>
   <hr />
-  <p style="margin: 0">Put in the tuning you're using.</p>
+  <p>Put in the tuning you're using.</p>
   <div class="input-note">
     <button class="button-web" (click)="removeString()">-</button>
     <div class="input-text">
@@ -65,24 +65,16 @@
 
   <hr class="mt-0" />
   <button (click)="submit()">Generate</button>
-</div>
+</section>
 
-<div class="main" *ngIf="mode === 'chords'">
+<section *ngIf="mode === 'chords'">
   <h1>Chord</h1>
   <div class="input-text">
     <input *ngFor="let string of chordArray;" type="text" [ngModel]="string" disabled />
   </div>
   <button (click)="back()">Back</button>
-</div>
+</section>
 
-<div class="main" *ngIf="mode === 'chords'">
+<section *ngIf="mode === 'chords'">
   <app-chordlist [strings]="tuningArray" [chord]="chordArray"></app-chordlist>
-</div>
-
-<div class="main" id="footer">
-  <p>Graphic design is my passion.
-    <span class="bullet">&bull;</span>
-    Built by <a href="https://mlewicki.me">Maciej Lewicki</a> using <a href="https://angular.io"><i class="fab fa-angular"></i>Angular</a>
-    <span class="bullet">&bull;</span>
-    Code available on <a href="https://github.com/mlewicki12/angular-chord-generator"><i class="fab fa-github-alt"></i>Github</a></p>
-</div>
+</section>
