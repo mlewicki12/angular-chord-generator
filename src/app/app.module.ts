@@ -10,6 +10,7 @@ import { ScaleComponent } from './components/pages/scale/scale/scale.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NoteSelectComponent } from './components/shared/note-select/note-select.component';
 import { ScaleSelectComponent } from './components/shared/scale-select/scale-select.component';
+import { ScaleMenuComponent } from './components/pages/scale/scale-menu/scale-menu.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ScaleSelectComponent } from './components/shared/scale-select/scale-sel
     ChordMenuComponent,
     ScaleComponent,
     NoteSelectComponent,
-    ScaleSelectComponent
+    ScaleSelectComponent,
+    ScaleMenuComponent,
   ],
   imports: [
     BrowserModule,

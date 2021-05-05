@@ -1,0 +1,42 @@
+
+<section *ngIf="mode === 'menu'">
+  <h1>Scale Generator</h1>
+  <hr />
+  <p>
+    This little tool will generate a basic scale shape chart for you.
+    Simply pick the tuning as well as scale shape and press 'Generate'
+    when you're ready.
+  </p>
+
+  <h2>Tuning</h2>
+  <hr />
+  <p>Put in the tuning you're using.</p>
+  <app-note-select [(notes)]="tuning"></app-note-select>
+
+  <h2>Chord</h2>
+  <hr />
+  <p>
+    Pick the scale you want to find shapes for.
+  </p>
+  <app-scale-select (shapeNoteChange)="updateNote($event)" (shapeChordChange)="updateChord($event)"></app-scale-select>
+
+  <hr class="mt-0" />
+  <button (click)="submit()">Generate</button>
+</section>
+
+<section *ngIf="mode === 'chords'">
+  <h1>Scale</h1>
+  <div class="input-shape">
+    <input type="text" [ngModel]="shapeNote" disabled />
+    <div class="select">
+      <select name="shapes" disabled>
+        <option [value]="chordName" selected>{{chordName}}</option>
+      </select>
+    </div>
+  </div>
+  <button (click)="back()">Back</button>
+</section>
+
+<section *ngIf="mode === 'chords'" style="padding: 10px">
+  <app-scale [strings]="strings"></app-scale>
+</section>

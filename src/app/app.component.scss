@@ -1,15 +1,15 @@
 
-main, footer {
+main, footer, nav {
   width: 50%;
 }
 
 @media (max-width: 950px) {
-  main, footer {
+  main, footer, nav {
     width: 90% !important;
   }
 }
 
-footer {
+nav, footer {
   p {
     margin: 0;
 
