@@ -9,6 +9,7 @@ export class ScaleComponent implements OnInit {
   @Input() strings: string[];
 
   constructor() {
+    debugger;
   }
 
   ngOnInit(): void {

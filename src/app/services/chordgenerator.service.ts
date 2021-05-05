@@ -72,8 +72,8 @@ export class ChordGeneratorService {
       fretArray.push(` ${add}${add.length === 1 ? ' ' : ''} `);
     }
 
-
     const ret = tuning
+      .reverse()
       .map(item => this.buildString(item)
         .map(fret => notes.find(note => note === fret) ? fret : '-')
         .map(fret => `-${fret}${fret.length === 1 ? '-' : ''}-`))
