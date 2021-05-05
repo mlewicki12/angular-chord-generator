@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { ChordComponent } from './components/chord/chord.component';
-import { ChordListComponent } from './components/chordlist/chordlist.component';
-import { ChordMenuComponent } from './components/chord-menu/chord-menu.component';
-import { ScaleComponent } from './components/scale/scale.component';
+import { ChordComponent } from './components/pages/chord/chord/chord.component';
+import { ChordListComponent } from './components/pages/chord/chordlist/chordlist.component';
+import { ChordMenuComponent } from './components/pages/chord/chord-menu/chord-menu.component';
+import { ScaleComponent } from './components/pages/scale/scale/scale.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ScalesMenuComponent } from './scales-menu/scales-menu.component';
+import { NoteSelectComponent } from './components/shared/note-select/note-select.component';
+import { ScaleSelectComponent } from './components/shared/scale-select/scale-select.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ScalesMenuComponent } from './scales-menu/scales-menu.component';
     ChordListComponent,
     ChordMenuComponent,
     ScaleComponent,
-    ScalesMenuComponent
+    NoteSelectComponent,
+    ScaleSelectComponent
   ],
   imports: [
     BrowserModule,

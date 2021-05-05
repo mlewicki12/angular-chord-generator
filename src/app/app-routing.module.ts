@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChordMenuComponent } from './components/chord-menu/chord-menu.component';
+import { ChordMenuComponent } from './components/pages/chord/chord-menu/chord-menu.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [

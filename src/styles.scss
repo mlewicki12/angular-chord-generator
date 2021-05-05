@@ -10,6 +10,46 @@ app-root {
   align-items: center;
 }
 
+@media (max-width: 950px) {
+  .button-mobile {
+    display: flex !important;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    > button {
+      margin: 5px;
+      padding: 2px 5px;
+    }
+  }
+
+  .input-text {
+    width: 100%;
+  }
+
+  .button-web {
+    display: none;
+  }
+}
+
+input {
+  width: 1.5rem;
+  padding: 0.5rem;
+
+  margin: 0.5rem;
+  background-color: unset;
+  border: unset;
+  border-bottom: 1px solid black;
+
+  text-align: center;
+}
+
+.button-mobile {
+  display: none;
+}
+
 section, .main {
   display: flex;
   flex-flow: column nowrap;

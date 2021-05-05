@@ -1,0 +1,46 @@
+
+<section *ngIf="mode === 'menu'">
+  <h1>Chord Generator</h1>
+  <hr />
+  <p>
+    This little tool will generate a list of chord shapes for you.
+    Simply input the tuning you're using as well as the chord you're looking
+    for and press 'Generate' when you're ready. Use the '+' and '-' buttons
+    to add and remove notes from tuning/chord.
+  </p>
+
+  <h2>Tuning</h2>
+  <hr />
+  <p>Put in the tuning you're using.</p>
+  <app-note-select [(notes)]="tuning"></app-note-select>
+
+  <h2>Chord</h2>
+  <hr />
+  <p>
+    Put in the chord you want to find shapes for.
+    Shape mode will let you pick a specific chord shape,
+    while Note mode will allow you to customise each note.
+  </p>
+  <app-note-select [(notes)]="chord" *ngIf="selectMode === 'note'"></app-note-select>
+  <app-scale-select (shapeNoteChange)="updateNote($event)" (shapeChordChange)="updateChord($event)" *ngIf="selectMode === 'shape'"></app-scale-select>
+
+  <div class="tab-holder">
+    <button class="tab" (click)="setShapeSelect()" [attr.selected]="selectMode === 'shape' ? '' : null">Shape mode</button>
+    <button class="tab" (click)="setNoteSelect()" [attr.selected]="selectMode === 'note' ? '' : null">Note mode</button>
+  </div>
+
+  <hr class="mt-0" />
+  <button (click)="submit()">Generate</button>
+</section>
+
+<section *ngIf="mode === 'chords'">
+  <h1>Chord</h1>
+  <div class="input-text">
+    <input *ngFor="let string of chordArray;" type="text" [ngModel]="string" disabled />
+  </div>
+  <button (click)="back()">Back</button>
+</section>
+
+<section *ngIf="mode === 'chords'">
+  <app-chordlist [strings]="tuningArray" [chord]="chordArray"></app-chordlist>
+</section>

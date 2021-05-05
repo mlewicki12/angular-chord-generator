@@ -1,0 +1,13 @@
+
+<div class="input-note">
+  <button class="button-web" (click)="removeNote()">-</button>
+  <div class="input-text">
+    <input *ngFor="let string of notes; let i = index" type="text" [(ngModel)]="string.note"/>
+  </div>
+  <button class="button-web" (click)="addNote()">+</button>
+
+  <div class="button-mobile">
+    <button (click)="removeNote()">-</button>
+    <button (click)="addNote()">+</button>
+  </div>
+</div>

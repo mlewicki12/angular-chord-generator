@@ -11,10 +11,7 @@ export class ChordMenuComponent implements OnInit {
   selectMode: string;
 
   shapeNote: string;
-  shapeChord: string;
-
-  notes: string[];
-  chords: any[];
+  shapeChord: number[];
 
   tuning: {note: string}[];
   chord: {note: string}[];
@@ -26,59 +23,8 @@ export class ChordMenuComponent implements OnInit {
     this.mode = 'menu';
     this.selectMode = 'shape';
 
-    this.notes = chordGenerator.getAllNotes();
-    this.chords = [
-      {key: 'Major', value: ChordGeneratorService.Scales.Major},
-      {key: 'Minor', value: ChordGeneratorService.Scales.Minor}
-    ];
-
-    this.shapeNote = 'C';
-    this.shapeChord = 'Major';
-
     this.tuning = [{note: 'E'}, {note: 'A'}, {note: 'D'}, {note: 'G'}, {note: 'B'}, {note: 'E'}];
     this.chord = [{note: 'C'}, {note: 'E'}, {note: 'G'}];
-  }
-
-  removeString() {
-    if(this.tuning.length <= 3) {
-      return;
-    }
-
-    this.tuning.pop();
-
-    if(this.chord.length > this.tuning.length) {
-      this.chord.pop();
-    }
-  }
-
-  addString() {
-    if(this.tuning.length >= 12) {
-      return;
-    }
-
-    // get the fifth
-    this.tuning.push({
-      note: this.chordGenerator.getNote(this.tuning[this.tuning.length - 1].note, 7)
-    });
-  }
-
-  removeChord() {
-    if(this.chord.length <= 2) {
-      return;
-    }
-
-    this.chord.pop();
-  }
-
-  addChord() {
-    // arbitrary limits fuck yeah
-    if(this.chord.length >= 6 || this.chord.length >= this.tuning.length) {
-      return;
-    }
-
-    this.chord.push({
-      note: this.chordGenerator.getNote(this.chord[this.chord.length - 1].note, 7)
-    });
   }
 
   setShapeSelect() {
@@ -87,6 +33,14 @@ export class ChordMenuComponent implements OnInit {
 
   setNoteSelect() {
     this.selectMode = 'note';
+  }
+
+  updateNote(note: string) {
+    this.shapeNote = note;
+  }
+
+  updateChord(chord: number[]) {
+    this.shapeChord = chord;
   }
 
   update(event, i, array) {
@@ -114,10 +68,11 @@ export class ChordMenuComponent implements OnInit {
         }, [])
         .filter(item => this.chordGenerator.isNote(item));
     } else {
+      debugger;
       this.chordArray = this.chordGenerator.buildChord(
         this.shapeNote,
         [1, 3, 5],
-        this.chords.find(chord => chord.key === this.shapeChord).value
+        this.shapeChord
       );
     }
 

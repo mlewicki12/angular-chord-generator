@@ -1,0 +1,28 @@
+
+.input-shape {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+}
+
+.select {
+  border-bottom: 1px solid black;
+  width: fit-content;
+
+  margin: 0.5rem;
+  text-align: center;
+
+  > select {
+    padding: 0.5rem;
+
+    border: unset;
+    background-color: unset;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}

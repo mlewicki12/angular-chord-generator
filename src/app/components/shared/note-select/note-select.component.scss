@@ -1,0 +1,22 @@
+
+.input-note {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+}
+
+@media (max-width: 950px) {
+  .input-text {
+    width: 100%;
+  }
+}
+
+.input-text {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
