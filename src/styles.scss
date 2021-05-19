@@ -85,25 +85,6 @@ section, .main {
   }
 }
 
-.select {
-  border-bottom: 1px solid black;
-  width: fit-content;
-
-  margin: 0.5rem;
-  text-align: center;
-
-  > select {
-    padding: 0.5rem;
-
-    border: unset;
-    background-color: unset;
-
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-}
-
 h1 {
   font-size: 1.75rem;
   padding: 0;
@@ -142,9 +123,6 @@ a {
 
 a:hover, a:active {
   color: lighten(#462FA7, 10%);
-  font-size: 1.05rem;
-  transition-duration: 1s;
-  transition-timing-function: ease;
 }
 
 i {

@@ -11,20 +11,28 @@ export class ChordMenuComponent implements OnInit {
   selectMode: string;
 
   shapeNote: string;
-  shapeChord: number[];
+  shapeChord: string;
 
-  tuning: {note: string}[];
-  chord: {note: string}[];
+  tuning: string[];
+  chord: string[];
 
   tuningArray: string[];
   chordArray: string[];
+
+  private chordMap = [
+    {key: 'Major', value: ChordGeneratorService.Scales.Major},
+    {key: 'Minor', value: ChordGeneratorService.Scales.Minor}
+  ];
 
   constructor(private chordGenerator: ChordGeneratorService) {
     this.mode = 'menu';
     this.selectMode = 'shape';
 
-    this.tuning = [{note: 'E'}, {note: 'A'}, {note: 'D'}, {note: 'G'}, {note: 'B'}, {note: 'E'}];
-    this.chord = [{note: 'C'}, {note: 'E'}, {note: 'G'}];
+    this.tuning = ['E', 'A', 'D', 'G', 'B', 'E'];
+    this.chord = ['C', 'E', 'G'];
+
+    this.shapeNote = 'C';
+    this.shapeChord = 'Major';
   }
 
   setShapeSelect() {
@@ -39,7 +47,7 @@ export class ChordMenuComponent implements OnInit {
     this.shapeNote = note;
   }
 
-  updateChord(chord: number[]) {
+  updateChord(chord: string) {
     this.shapeChord = chord;
   }
 
@@ -58,21 +66,19 @@ export class ChordMenuComponent implements OnInit {
 
   submit() {
     // filter out non-note strings just in case
-    this.tuningArray = this.tuning.map(item => item.note).filter(item => this.chordGenerator.isNote(item)).reverse();
+    this.tuningArray = this.tuning.filter(item => this.chordGenerator.isNote(item)).reverse();
 
     if(this.selectMode === 'note') {
       this.chordArray = this.chord
-        .map(item => item.note)
         .reduce((prev, next) => {
           return prev.includes(next) ? prev : prev.concat([next]);
         }, [])
         .filter(item => this.chordGenerator.isNote(item));
     } else {
-      debugger;
       this.chordArray = this.chordGenerator.buildChord(
         this.shapeNote,
         [1, 3, 5],
-        this.shapeChord
+        this.chordMap.find(item => item.key === this.shapeChord).value
       );
     }
 

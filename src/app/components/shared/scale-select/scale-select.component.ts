@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChordGeneratorService } from 'src/app/services/chordgenerator.service';
 
 @Component({
@@ -8,38 +8,29 @@ import { ChordGeneratorService } from 'src/app/services/chordgenerator.service';
 })
 export class ScaleSelectComponent implements OnInit {
   notes: string[];
-  chords: {key: string, value: number[]}[];
+  chords: string[];
 
-  shapeNote: string;
+  @Input() shapeNote: string;
   @Output() shapeNoteChange = new EventEmitter<string>();
 
-  shapeChord: string;
-  @Output() shapeChordChange = new EventEmitter<number[]>();
+  @Input() shapeChord: string;
+  @Output() shapeChordChange = new EventEmitter<string>();
+
+  ngOnInit(): void {
+  }
 
   constructor(private chordGenerator: ChordGeneratorService) {
     this.notes = chordGenerator.getAllNotes();
-    this.chords = [
-      {key: 'Major', value: ChordGeneratorService.Scales.Major},
-      {key: 'Minor', value: ChordGeneratorService.Scales.Minor}
-    ];
-
-    this.shapeNote = 'C';
-    this.shapeChord = 'Major';
+    this.chords = ['Major', 'Minor'];
   }
 
   updateNote(note: string) {
     this.shapeNote = note;
     this.shapeNoteChange.emit(note);
   }
-
-  updateChord(chord: string) {
-    this.shapeChord = chord;
-    this.shapeChordChange.emit(this.chords.find(item => item.key === chord).value);
+  
+  updateChord(note: string) {
+    this.shapeChord = note;
+    this.shapeChordChange.emit(note);
   }
-
-  ngOnInit(): void {
-    this.shapeNoteChange.emit(this.shapeNote);
-    this.shapeChordChange.emit(this.chords.find(item => item.key === this.shapeChord).value);
-  }
-
 }

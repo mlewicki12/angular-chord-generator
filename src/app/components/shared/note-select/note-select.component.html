@@ -2,7 +2,7 @@
 <div class="input-note">
   <button class="button-web" (click)="removeNote()">-</button>
   <div class="input-text">
-    <input *ngFor="let string of notes; let i = index" type="text" [(ngModel)]="string.note"/>
+    <chords-input [options]="notes" (optionsChange)="notesChange.emit($event)"></chords-input>
   </div>
   <button class="button-web" (click)="addNote()">+</button>
 

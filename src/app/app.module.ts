@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NoteSelectComponent } from './components/shared/note-select/note-select.component';
 import { ScaleSelectComponent } from './components/shared/scale-select/scale-select.component';
 import { ScaleMenuComponent } from './components/pages/scale/scale-menu/scale-menu.component';
+import { SelectComponent } from './components/shared/select/select.component';
+import { InputComponent } from './components/shared/input/input.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { ScaleMenuComponent } from './components/pages/scale/scale-menu/scale-me
     NoteSelectComponent,
     ScaleSelectComponent,
     ScaleMenuComponent,
+    SelectComponent,
+    InputComponent,
   ],
   imports: [
     BrowserModule,

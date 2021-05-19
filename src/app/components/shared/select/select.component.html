@@ -1,0 +1,6 @@
+
+<div class="select">
+  <select name="notes" [ngModel]="value" (ngModelChange)="update($event)">
+    <option *ngFor="let item of options" [value]="item">{{item}}</option>
+  </select>
+</div>

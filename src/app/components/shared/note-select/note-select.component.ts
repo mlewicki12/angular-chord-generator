@@ -7,8 +7,8 @@ import { ChordGeneratorService } from 'src/app/services/chordgenerator.service';
   styleUrls: ['./note-select.component.scss']
 })
 export class NoteSelectComponent implements OnInit {
-  @Input() notes: {note: string}[];
-  @Output() notesChange = new EventEmitter<{note: string}[]>();
+  @Input() notes: string[];
+  @Output() notesChange = new EventEmitter<string[]>();
 
   constructor(private chordGenerator: ChordGeneratorService) { }
 
@@ -30,9 +30,9 @@ export class NoteSelectComponent implements OnInit {
     }
 
     // get the fifth
-    this.notes.push({
-      note: this.chordGenerator.getNote(this.notes[this.notes.length - 1].note, 7)
-    });
+    this.notes.push(
+      this.chordGenerator.getNote(this.notes[this.notes.length - 1], 7)
+    );
 
     this.notesChange.emit(this.notes);
   }

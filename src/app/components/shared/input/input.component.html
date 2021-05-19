@@ -1,0 +1,2 @@
+
+<input *ngFor="let item of optionsObj; let i = index" type="text" [ngModel]="item.value" (ngModelChange)="update($event, i)" />
